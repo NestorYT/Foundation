@@ -1,5 +1,5 @@
 local configuration = {
-	["whitelisted_names"] = {}
+	["whitelisted_ips"] = {}
 }
 
 local whitelistConfig = './resources/westre-whitelist/whitelist.txt'
@@ -15,10 +15,10 @@ AddEventHandler('foundation:onPlayerConnect', function()
     local isWhitelisted = false
 	local name = GetPlayerName(source)
 	
-	print('Player ' .. name .. ' connecting with playerId ' .. source)
+	print('Player ' .. name .. ' connecting with playerIP ' .. source)
 	
-	for key, value in ipairs(configuration["whitelisted_names"]) do
-		if configuration["whitelisted_names"][key] == name then
+	for key, value in ipairs(configuration["whitelisted_ips"]) do
+		if configuration["whitelisted_ips"][key] == address then
 			isWhitelisted = true;
 			break;
 		end
@@ -35,9 +35,9 @@ AddEventHandler('chatMessageEntered', function(name, color, message)
 		if message == "!refreshwhitelist" then
 			refreshWhitelist()
 			
-			local namesWhitelisted = ""
-			for key, value in ipairs(configuration["whitelisted_names"]) do
-				namesWhitelisted = namesWhitelisted .. configuration["whitelisted_names"][key] .. " | "
+			local ipsWhitelisted = ""
+			for key, value in ipairs(configuration["whitelisted_ips"]) do
+				ipsWhitelisted = ipsWhitelisted .. configuration["whitelisted_ips"][key] .. " | "
 			end
 			
 			TriggerClientEvent('chatMessage', source, '', { 255, 255, 255 }, "Whitelist has been refreshed: " .. namesWhitelisted)
