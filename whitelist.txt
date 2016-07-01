@@ -2,5 +2,3 @@ user1
 user2
 user3
 user4
-westre
-westre2
