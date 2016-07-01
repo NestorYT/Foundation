@@ -1,16 +1,16 @@
 local isWhitelisted = false;
 
-AddEventHandler('onPlayerJoining', function(playerId, name)
+AddEventHandler('onPlayerJoining', function(playerIP, address)
 	TriggerServerEvent('foundation:onPlayerConnect')
 end)
 
-RegisterNetEvent('foundation:playerWhitelisted')
-AddEventHandler('foundation:playerWhitelisted', function(whitelisted)
+RegisterNetEvent('foundation:ipWhitelisted')
+AddEventHandler('foundation:ipWhitelisted', function(whitelisted)
 	isWhitelisted = whitelisted
 	
 	if not isWhitelisted then
 		SendNUIMessage({
-			command = 'blockPlayer'
+			command = 'blockIP'
 		})
 	else
 		sendMessage('You are whitelisted, welcome!')
@@ -25,14 +25,14 @@ Citizen.CreateThread(function()
 	while true do
         Wait(50)
 		
-		if NetworkIsPlayerActive(PlayerId()) then
+		if NetworkIsPlayerActive(PlayerIP()) then
 			if not isWhitelisted then
-				local ped = GetPlayerPed(PlayerId())
+				local ped = GetPlayerPed(PlayerIP())
 				if IsEntityVisible(ped) then
 					SetEntityVisible(ped, false)
 				end
-				SetPlayerInvincible(PlayerId(), true)
-				SetPlayerControl(PlayerId(), false, false)
+				SetPlayerInvincible(PlayerIP(), true)
+				SetPlayerControl(PlayerIP(), false, false)
 			end
 		end        
     end
