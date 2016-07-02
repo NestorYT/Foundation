@@ -11,7 +11,7 @@ AddEventHandler('playerConnecting', function(name, setCallback)
 	for i = 1, #identifiers do
 		local ip = stringsplit(identifiers[i], ':')[2]
 		if allowedIPs[ip] == nil then 
-			print('Player tried to join but is not in whitelist: ' .. ip)
+			print('Player tried to join but is not in whitelist: ' .. ip ..)
 			setCallback("You are not allowed to enter this server.")
 			CancelEvent()
 		end
